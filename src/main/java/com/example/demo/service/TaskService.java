@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Task;
 import com.example.demo.repository.TaskRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class TaskService {
@@ -60,5 +63,9 @@ public class TaskService {
         Task existingTask = getTaskById(id);
 
         repository.delete(existingTask);
+    }
+    public Page<Task> getTasksWithPagination(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return repository.findAll(pageable);
     }
 }

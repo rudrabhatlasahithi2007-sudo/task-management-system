@@ -75,6 +75,6 @@ public class TaskController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size) {
 
-        return taskService.getTasksWithPagination(page, size);
+        return service.getTasksWithPagination(page, size);
     }
 }
