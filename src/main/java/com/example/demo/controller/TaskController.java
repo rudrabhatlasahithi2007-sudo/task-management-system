@@ -10,6 +10,8 @@ import jakarta.validation.Valid;
 
 import com.example.demo.entity.Task;
 import com.example.demo.service.TaskService;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/tasks")
@@ -67,5 +69,12 @@ public class TaskController {
         service.deleteTask(id);
 
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/page")
+    public Page<Task> getTasks(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size) {
+
+        return taskService.getTasksWithPagination(page, size);
     }
 }
